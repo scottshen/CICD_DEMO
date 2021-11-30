@@ -1,8 +1,13 @@
-# Container image that runs your code
-FROM alpine:3.10
+FROM centos
+MAINTAINER SCOTT
 
-# Copies your code file from your action repository to the filesystem path `/` of the container
-COPY entrypoint.sh /entrypoint.sh
 
-# Code file to execute when the docker container starts up (`entrypoint.sh`)
-ENTRYPOINT ["/entrypoint.sh"]
+ENV http_proxy "http://10.87.0.55:8000"
+ENV MYPATH /usr/local
+WORKDIR $MYPATH
+
+RUN yum -y install vim
+
+EXPOSE 80
+
+CMD /bin/bash
